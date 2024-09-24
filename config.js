@@ -1,0 +1,1 @@
+export const RAWG_API_KEY = "6f7e956f52bb4e0cb53d0927bb669dd9";
