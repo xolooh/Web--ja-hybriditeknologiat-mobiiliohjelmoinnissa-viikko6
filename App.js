@@ -3,7 +3,7 @@ import { View, Text, FlatList, Image, StyleSheet, TextInput } from 'react-native
 import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { RAWG_API_KEY } from './config';
+import config from './config'; // Importing the config
 
 const Stack = createStackNavigator();
 
@@ -16,9 +16,10 @@ const GameList = () => {
     try {
       setLoading(true);
       const url = query
-        ? `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&search=${query}` //haku api
-        : `https://api.rawg.io/api/games?key=${RAWG_API_KEY}`; //api
+        ? `https://api.rawg.io/api/games?key=${config.RAWG_API_KEY}&search=${query}`
+        : `https://api.rawg.io/api/games?key=${config.RAWG_API_KEY}`;
 
+      console.log('Fetching from URL:', url); // For debugging
       const response = await axios.get(url);
       setGames(response.data.results);
       setLoading(false);
@@ -46,7 +47,6 @@ const GameList = () => {
 
   return (
     <View style={styles.container}>
-      {}
       <TextInput
         style={styles.searchInput}
         placeholder="Search for a game..."
